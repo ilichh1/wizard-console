@@ -7,6 +7,7 @@ package com.wizard.utils.menu;
 
 import com.wizard.interfaces.MainCallable;
 import com.wizard.main.WizardConsole;
+import com.wizard.main.controllers.ProductsController;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
 
@@ -15,6 +16,10 @@ import java.util.ArrayList;
  * @author ilichh1
  */
 public class MenuController implements MainCallable {
+    
+    // Wizard Controllers
+    private static final ProductsController PRODUCTS_CONTROLLER = new ProductsController();
+    
     private final ArrayList<Menu> menus = new ArrayList<>();
     
     private Menu startingMenu;
@@ -48,6 +53,9 @@ public class MenuController implements MainCallable {
             break;
             case "goToProductsMenu":
                 this.moveToMenu("products");
+            break;
+            case "viewAllProducts":
+                PRODUCTS_CONTROLLER.printTable();
             break;
             case "goToClientsMenu":
                 this.moveToMenu("clients");
