@@ -51,7 +51,7 @@ public class DataValidator {
     }
     
     public static boolean validateToyCategory(int categoryId) {
-        return categoryId < 0 || categoryId > Product.CATEGORIES.length - 1;
+        return !(categoryId < 0 || categoryId > Product.CATEGORIES.length - 1);
     }
     
 }

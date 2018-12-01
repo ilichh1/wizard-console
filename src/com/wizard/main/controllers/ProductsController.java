@@ -6,6 +6,7 @@
 package com.wizard.main.controllers;
 
 import com.wizard.product.Product;
+import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +31,14 @@ public class ProductsController {
     
     public ProductsController() {
         this.initializateProductsController();
+    }
+    
+    public void createAndSaveProduct() {
+        Product productToSave = new Product();
+        productToSave.promptInConsole();
+        
+        this.products.add(productToSave);
+        ConsoleUtils.printSuccessMessage("Producto guardado correctamente.");
     }
     
     private void initializateProductsController() {

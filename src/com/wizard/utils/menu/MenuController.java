@@ -54,6 +54,9 @@ public class MenuController implements MainCallable {
             case "goToProductsMenu":
                 this.moveToMenu("products");
             break;
+            case "addProduct":
+                PRODUCTS_CONTROLLER.createAndSaveProduct();
+            break;
             case "viewAllProducts":
                 PRODUCTS_CONTROLLER.printTable();
             break;
@@ -71,7 +74,7 @@ public class MenuController implements MainCallable {
             break;
             case "continue": break;
             default:
-                System.out.println("Doing: " + actionName);
+                System.out.println("STILL WORKING ON: " + actionName);
             break;
         }
         return true;

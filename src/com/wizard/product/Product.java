@@ -5,6 +5,9 @@
  */
 package com.wizard.product;
 
+import com.wizard.utils.ConsoleUtils;
+import com.wizard.utils.DataValidator;
+
 /**
  *
  * @author ilichh1
@@ -46,12 +49,57 @@ public class Product {
         this.price = price;
     }
     
+    public void promptInConsole() {
+        String[] fieldNames = new String[] {"name", "category", "stock", "price"};
+        for (String fieldName : fieldNames) {
+            this.askForProductField(fieldName);
+        }
+    }
+    
+    private void askForProductField(String fieldName) {
+        boolean isDataValid;
+        do {
+            try {
+                switch (fieldName) {
+                    case "name":
+                        System.out.print("Nombre del producto: ");
+                        this.setName(ConsoleUtils.askForString());
+                    break;
+                    case "category":
+                        printToyCategories();
+                        System.out.print("Categoria del producto: ");
+                        // Substract one becaus of array index starts on 0
+                        this.setCategory(ConsoleUtils.askForInteger() - 1);
+                    break;
+                    case "stock":
+                        System.out.print("Existencia del producto: ");
+                        this.setStock(ConsoleUtils.askForInteger());
+                    break;
+                    case "price":
+                        System.out.print("Precio del producto: ");
+                        this.setPrice(ConsoleUtils.askForDouble());
+                    break;
+                    default:
+                        System.out.println("ERROR: ESE CAMPO NO EXISTE EN 'Product'");
+                        System.exit(0);
+                    return;
+                }
+                isDataValid = true;
+            } catch (Exception ex)  {
+                ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
+                isDataValid = false;
+            }
+        } while(!isDataValid);
+    }
+    
     // Getters / Setters
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
+        if (name.length() < 3)
+            throw new Exception("El nombre debe tener mínimo 3 letras.");
         this.name = name;
     }
 
@@ -59,7 +107,9 @@ public class Product {
         return CATEGORIES[this.category];
     }
 
-    public void setCategory(int category) {
+    public void setCategory(int category) throws Exception {
+        if (!DataValidator.validateToyCategory(category))
+            throw new Exception("Esa categoria no existe");
         this.category = category;
     }
 
@@ -67,7 +117,9 @@ public class Product {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(int stock) throws Exception {
+        if (stock < 0)
+            throw new Exception("No puede haber existencia negativa.");
         this.stock = stock;
     }
 
@@ -75,7 +127,39 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price) throws Exception {
+        if (price < 0)
+            throw new Exception("No puede existir un precio negativo.");
         this.price = price;
+    }
+    
+    // STATIC MEHTOD USED ONLY TO PRINT ALL TOYS CATEGORIES
+    public static void printToyCategories() {
+        int categoryId = 1;
+        
+        int longestCategoryName = 0;
+        for (String category : CATEGORIES)
+            if (category.length() > longestCategoryName)
+                longestCategoryName = category.length();
+        
+        longestCategoryName += 8;
+        
+        String topLine = "==== Categoria ====";
+        System.out.print("\n" + topLine + "\n");        
+        for (String category : CATEGORIES) {
+            String lineToPrint = " *  " + category + " ";
+            String remainingDots = "";
+            for (int i = 0; i < longestCategoryName - lineToPrint.length(); i++)
+                remainingDots += ".";
+            System.out.println(lineToPrint + remainingDots + " " + categoryId + ")");
+            categoryId++;
+        }
+        
+        String bottomDividerLine = "";
+        for(int i = 0; i < topLine.length(); i++) {
+            bottomDividerLine += "=";
+        }
+        
+        System.out.println(bottomDividerLine);
     }
 }
