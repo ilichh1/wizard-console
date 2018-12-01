@@ -5,36 +5,48 @@
  */
 package com.wizard.main;
 
-import com.wizard.util.menu.Menu;
-import com.wizard.util.menu.MenuEntry;
+import com.wizard.utils.menu.MenuController;
 
 /**
  *
  * @author ilichh1
  */
 public class WizardConsole {
-
+    
+    private static final MenuController menuController = new MenuController();
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        Menu menuDeInicio = new Menu(new MenuEntry[] {
-            new MenuEntry("PRODUCTOS", 'A', "goToProductsMenu"),
-            new MenuEntry("CLIENTES", 'B', "goToClientsMenu"),
-            new MenuEntry("VENDEDORES", 'C', "goToSalesmenMenu"),
-            new MenuEntry("VENTAS", 'D', "goToSellsMenu"),
-            new MenuEntry("SALIR", 'E', "exit")
-        }, "Menú de Inicio");
-        
-        menuDeInicio.printInConsole();
-        
     }
     
     public static boolean doSpecificAction(String actionName) {
         // TODO: Completar codigo para realizar cada acción en especifico
-        System.out.println("Doing: " + actionName);
+        switch(actionName) {
+            case "exit":
+                System.out.println("¡Hasta luego! - Webtix Software");
+                System.exit(0);
+            break;
+            case "goToProductsMenu";
+                menuController.moveToMenu("products");
+            break;
+            case "goToClientsMenu";
+                menuController.moveToMenu("clients");
+            break;
+            case "goToSalesmenMenu";
+                menuController.moveToMenu("salesmen");
+            break;
+            case "goToSellsMenu";
+                menuController.moveToMenu("sells");
+            break;
+            case "goBack":
+                menuController.previousMenu();
+            break;
+            default:
+                System.out.println("Doing: " + actionName);
+        }
         return true;
     }
     
