@@ -46,7 +46,7 @@ public class Menu {
     }
     
     private boolean validateAndCallAction(char selectedOption) {
-        System.out.println(selectedOption);
+        selectedOption = Character.toUpperCase(selectedOption);
         if (this.menuMap.getOrDefault(selectedOption, "NO_OPTION").equals("NO_OPTION")) {
             ConsoleUtils.printErrorMessage("Esa opción no existe.");
             return false;
@@ -55,29 +55,40 @@ public class Menu {
         return true;
     }
     
+    private void promptUser() {
+        boolean isUserInputCorrect;
+        do {
+            System.out.print("Su eleccion: ");
+            isUserInputCorrect = this.validateAndCallAction(ConsoleUtils.askForCharacter());
+        } while(!isUserInputCorrect);
+    }
+    
     public void addMenuOption(MenuEntry newOption) {
         this.menuOptions.add(newOption);
         if(newOption.menuLabel.length() > this.longestMenuLabel)
             this.longestMenuLabel = newOption.menuLabel.length();
     }
     
-    public void printAndPrompt() {
-        int suposedFinalLength = this.longestMenuLabel + 7;
+    public void printMenu() {
+        int suposedFinalLength = this.longestMenuLabel + 8;
         
-        System.out.println("\n======== " + this.menuName + " ========\n");
+        String topDividerLine = "======== " + this.menuName + " ========";
+        String bottomDividerLine = "";
+        
+        for (int i = 0; i < topDividerLine.length(); i++)
+            bottomDividerLine += "=";
+        
+        
+        System.out.println("\n" + topDividerLine + "\n");
         for (MenuEntry menuOption : this.menuOptions) {
-            String lineToPrint = " * " + menuOption.menuLabel + " ";
+            String lineToPrint = " *  " + menuOption.menuLabel + " ";
             String remainingDots = "";
             for (int i = 0; i < suposedFinalLength - lineToPrint.length(); i++)
                 remainingDots += ".";
             System.out.println(lineToPrint + remainingDots + " " + menuOption.menuOption + ")");
         }
+        System.out.println(bottomDividerLine);
         
-        System.out.print("Su eleccion: ");
-        while(!this.validateAndCallAction(ConsoleUtils.askForCharacter())) {
-            // Empty while only to repeat until the validation is successful
-        }
+        this.promptUser();
     }
-    
-    
 }

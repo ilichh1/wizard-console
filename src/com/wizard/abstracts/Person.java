@@ -5,6 +5,7 @@
  */
 package com.wizard.abstracts;
 
+import com.wizard.interfaces.Registrable;
 import java.util.Date;
 
 /**

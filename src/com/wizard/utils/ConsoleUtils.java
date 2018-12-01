@@ -16,8 +16,20 @@ public class ConsoleUtils {
     
     private static final Scanner KEYBOARD_READER = new Scanner(System.in);
     
+    public static String askForString() {
+        return KEYBOARD_READER.nextLine();
+    }
+    
+    public static int askForInteger() {
+        return Integer.parseInt(askForString());
+    }
+    
+    public static double askForDouble () {
+        return Double.parseDouble(askForString());
+    }
+    
     public static char askForCharacter() {
-        return KEYBOARD_READER.nextLine().charAt(0);
+        return askForString().charAt(0);
     }
     
     public static void printErrorMessage(String message) {

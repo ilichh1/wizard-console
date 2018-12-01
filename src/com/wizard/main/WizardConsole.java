@@ -20,6 +20,8 @@ public class WizardConsole {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MENU_CONTROLLER.startMenuController();
+        MENU_CONTROLLER.startMenuController();
     }
     
     public static boolean doSpecificAction(String actionName) {
@@ -44,8 +46,12 @@ public class WizardConsole {
             case "goBack":
                 MENU_CONTROLLER.previousMenu();
             break;
+            case "continue":
+                MENU_CONTROLLER.triggerLastMenu();
+            break;
             default:
                 System.out.println("Doing: " + actionName);
+                doSpecificAction("continue");
         }
         return true;
     }

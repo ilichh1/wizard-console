@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class MenuController {
     private final ArrayList<Menu> menus = new ArrayList<>();
+    private boolean isMenuControllerStarted = false;
     
     private Menu startingMenu;
     private Menu productsMenu;
@@ -28,17 +29,22 @@ public class MenuController {
         } catch (Exception ex) {
             ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
             WizardConsole.doSpecificAction("exit");
-        } finally {
-            this.triggerLastMenu();
         }
     }
     
-    private void triggerLastMenu() {
+    public void startMenuController() {
+        if(!this.isMenuControllerStarted) {
+            this.triggerLastMenu();
+            this.isMenuControllerStarted = true;
+        }
+    }
+    
+    public void triggerLastMenu() {
         // TODO: Probablemente de un error aquí por el índice
         if (this.menus.size() == 1) {
-            this.menus.get(0).printAndPrompt();
+            this.menus.get(0).printMenu();
         } else {
-            this.menus.get(this.menus.size() - 1).printAndPrompt();
+            this.menus.get(this.menus.size() - 1).printMenu();
         }
     }
     
