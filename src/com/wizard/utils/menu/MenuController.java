@@ -5,6 +5,7 @@
  */
 package com.wizard.utils.menu;
 
+import com.wizard.interfaces.MainCallable;
 import com.wizard.main.WizardConsole;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
@@ -13,9 +14,8 @@ import java.util.ArrayList;
  *
  * @author ilichh1
  */
-public class MenuController {
+public class MenuController implements MainCallable {
     private final ArrayList<Menu> menus = new ArrayList<>();
-    private boolean isMenuControllerStarted = false;
     
     private Menu startingMenu;
     private Menu productsMenu;
@@ -28,23 +28,53 @@ public class MenuController {
             this.initializateMenus();
         } catch (Exception ex) {
             ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
-            WizardConsole.doSpecificAction("exit");
         }
     }
     
     public void startMenuController() {
-        if(!this.isMenuControllerStarted) {
-            this.triggerLastMenu();
-            this.isMenuControllerStarted = true;
-        }
+        this.triggerLastMenu();
     }
     
-    public void triggerLastMenu() {
+    /*
+     * Returns true if the end of the execution is reached
+     */ 
+    @Override
+    public boolean doSpecificAction(String actionName) {
+        // TODO: Completar codigo para realizar cada acción en especifico
+        switch(actionName) {
+            case "exit":
+                System.out.println("¡Hasta luego! - Webtix Software");
+                WizardConsole.isExecutionEnded = true;
+            break;
+            case "goToProductsMenu":
+                this.moveToMenu("products");
+            break;
+            case "goToClientsMenu":
+                this.moveToMenu("clients");
+            break;
+            case "goToSalesmenMenu":
+                this.moveToMenu("salesmen");
+            break;
+            case "goToSellsMenu":
+                this.moveToMenu("sells");
+            break;
+            case "goBack":
+                this.previousMenu();
+            break;
+            case "continue": break;
+            default:
+                System.out.println("Doing: " + actionName);
+            break;
+        }
+        return true;
+    }
+    
+    public boolean triggerLastMenu() {
         // TODO: Probablemente de un error aquí por el índice
         if (this.menus.size() == 1) {
-            this.menus.get(0).printMenu();
+            return this.menus.get(0).printMenu(this);
         } else {
-            this.menus.get(this.menus.size() - 1).printMenu();
+            return this.menus.get(this.menus.size() - 1).printMenu(this);
         }
     }
     

@@ -29,7 +29,8 @@ public class ConsoleUtils {
     }
     
     public static char askForCharacter() {
-        return askForString().charAt(0);
+        String lineTyped = askForString();
+        return lineTyped.length() > 0 ? lineTyped.charAt(0) : ' ';
     }
     
     public static void printErrorMessage(String message) {

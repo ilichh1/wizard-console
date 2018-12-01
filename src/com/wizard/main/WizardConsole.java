@@ -13,47 +13,17 @@ import com.wizard.utils.menu.MenuController;
  */
 public class WizardConsole {
     
-    private static final MenuController MENU_CONTROLLER = new MenuController();
+    public static final MenuController MENU_CONTROLLER = new MenuController();
+    public static boolean isExecutionEnded = false;
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MENU_CONTROLLER.startMenuController();
-        MENU_CONTROLLER.startMenuController();
-    }
-    
-    public static boolean doSpecificAction(String actionName) {
-        // TODO: Completar codigo para realizar cada acción en especifico
-        switch(actionName) {
-            case "exit":
-                System.out.println("¡Hasta luego! - Webtix Software");
-                System.exit(0);
-            break;
-            case "goToProductsMenu":
-                MENU_CONTROLLER.moveToMenu("products");
-            break;
-            case "goToClientsMenu":
-                MENU_CONTROLLER.moveToMenu("clients");
-            break;
-            case "goToSalesmenMenu":
-                MENU_CONTROLLER.moveToMenu("salesmen");
-            break;
-            case "goToSellsMenu":
-                MENU_CONTROLLER.moveToMenu("sells");
-            break;
-            case "goBack":
-                MENU_CONTROLLER.previousMenu();
-            break;
-            case "continue":
-                MENU_CONTROLLER.triggerLastMenu();
-            break;
-            default:
-                System.out.println("Doing: " + actionName);
-                doSpecificAction("continue");
-        }
-        return true;
+        do {
+            MENU_CONTROLLER.startMenuController();
+        } while(!isExecutionEnded);
     }
     
 }

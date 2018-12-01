@@ -33,6 +33,8 @@ public abstract class Person implements Registrable {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.registeredDate = null;
+        this.modifiedDate = null;
     }
     
     public Person (int id, String name, String surname, Date registeredDate, Date modifiedDate) {

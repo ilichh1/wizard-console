@@ -5,7 +5,7 @@
  */
 package com.wizard.utils.menu;
 
-import com.wizard.main.WizardConsole;
+import com.wizard.interfaces.MainCallable;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +37,7 @@ public class Menu {
             if (this.menuMap.getOrDefault(menuOption.menuOption, "NO_OPTION").equals("NO_OPTION")) {
                 this.menuMap.put(menuOption.menuOption, menuOption.actionToCall);
             } else {
-                throw new Exception("No pueden existir dos menus con la misma selección.");
+                throw new Exception("No pueden existir dos opciones de menú con la misma letra.");
             }
             
             if (menuOption.menuLabel.length() > this.longestMenuLabel)
@@ -45,22 +45,22 @@ public class Menu {
         }
     }
     
-    private boolean validateAndCallAction(char selectedOption) {
+    private boolean validateAndCallAction(char selectedOption, MainCallable actioner) {
         selectedOption = Character.toUpperCase(selectedOption);
         if (this.menuMap.getOrDefault(selectedOption, "NO_OPTION").equals("NO_OPTION")) {
             ConsoleUtils.printErrorMessage("Esa opción no existe.");
             return false;
         }
-        WizardConsole.doSpecificAction(this.menuMap.get(selectedOption));
+        actioner.doSpecificAction(this.menuMap.get(selectedOption));
         return true;
     }
     
-    private void promptUser() {
-        boolean isUserInputCorrect;
-        do {
+    private boolean promptUser(MainCallable actioner) {
+        for(;;) {
             System.out.print("Su eleccion: ");
-            isUserInputCorrect = this.validateAndCallAction(ConsoleUtils.askForCharacter());
-        } while(!isUserInputCorrect);
+            if (this.validateAndCallAction(ConsoleUtils.askForCharacter(), actioner))
+                return false;
+        }
     }
     
     public void addMenuOption(MenuEntry newOption) {
@@ -69,7 +69,7 @@ public class Menu {
             this.longestMenuLabel = newOption.menuLabel.length();
     }
     
-    public void printMenu() {
+    public boolean printMenu(MainCallable actioner) {
         int suposedFinalLength = this.longestMenuLabel + 8;
         
         String topDividerLine = "======== " + this.menuName + " ========";
@@ -89,6 +89,6 @@ public class Menu {
         }
         System.out.println(bottomDividerLine);
         
-        this.promptUser();
+        return this.promptUser(actioner);
     }
 }

@@ -5,8 +5,6 @@
  */
 package com.wizard.utils.menu;
 
-import com.wizard.main.WizardConsole;
-
 /**
  *
  * @author ilichh1
@@ -21,10 +19,6 @@ public class MenuEntry {
         this.menuLabel = label;
         this.menuOption = option;
         this.actionToCall = action;
-    }
-    
-    public void executeOption() {
-        WizardConsole.doSpecificAction(actionToCall);
     }
     
 }
