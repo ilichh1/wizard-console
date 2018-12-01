@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/ilichh1/NetBeansProjects/WizardConsole/src/com/wizard/product/SoldProduct.java</file>
+            <file>file:/Users/ilichh1/NetBeansProjects/WizardConsole/src/com/wizard/sell/Sell.java</file>
+            <file>file:/Users/ilichh1/NetBeansProjects/WizardConsole/src/com/wizard/product/Product.java</file>
+            <file>file:/Users/ilichh1/NetBeansProjects/WizardConsole/src/com/wizard/salemen/Saleman.java</file>
+            <file>file:/Users/ilichh1/NetBeansProjects/WizardConsole/src/com/wizard/main/controllers/ProductsController.java</file>
+        </group>
     </open-files>
 </project-private>
