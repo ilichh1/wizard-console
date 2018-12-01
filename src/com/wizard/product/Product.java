@@ -10,20 +10,36 @@ package com.wizard.product;
  * @author ilichh1
  */
 public class Product {
+    // CATEGORIES
+    public static final int BIKES = 0;
+    public static final int WATER_GUNS = 1;
+    public static final int DOLLS = 2;
+    public static final int BEARS = 3;
+    public static final int TABLE_GAMES = 4;
+    public static final int RC_CARS = 5;
+    public static final String[] CATEGORIES = new String[] {
+        "Bicicletas",
+        "Pistolas de agua",
+        "Muñecas / Muñecos",
+        "Osos de felpa",
+        "Juegos de mesa",
+        "Carros a control remoto"
+    };
+    
     // Fields
     private String name;
-    private String category;
+    private int category;
     private int stock;
     private double price;
     
     public Product() {
         this.name = null;
-        this.category = null;
+        this.category = -1;
         this.stock = -1;
         this.price = Double.NaN;
     }
     
-    public Product(String name, String category, int stock, double price) {
+    public Product(String name, int category, int stock, double price) {
         this.name = name;
         this.category = category;
         this.stock = stock;
@@ -40,10 +56,10 @@ public class Product {
     }
 
     public String getCategory() {
-        return category;
+        return CATEGORIES[this.category];
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
