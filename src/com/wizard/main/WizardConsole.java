@@ -13,7 +13,7 @@ import com.wizard.utils.menu.MenuController;
  */
 public class WizardConsole {
     
-    private static final MenuController menuController = new MenuController();
+    private static final MenuController MENU_CONTROLLER = new MenuController();
     
     /**
      * @param args the command line arguments
@@ -29,20 +29,20 @@ public class WizardConsole {
                 System.out.println("¡Hasta luego! - Webtix Software");
                 System.exit(0);
             break;
-            case "goToProductsMenu";
-                menuController.moveToMenu("products");
+            case "goToProductsMenu":
+                MENU_CONTROLLER.moveToMenu("products");
             break;
-            case "goToClientsMenu";
-                menuController.moveToMenu("clients");
+            case "goToClientsMenu":
+                MENU_CONTROLLER.moveToMenu("clients");
             break;
-            case "goToSalesmenMenu";
-                menuController.moveToMenu("salesmen");
+            case "goToSalesmenMenu":
+                MENU_CONTROLLER.moveToMenu("salesmen");
             break;
-            case "goToSellsMenu";
-                menuController.moveToMenu("sells");
+            case "goToSellsMenu":
+                MENU_CONTROLLER.moveToMenu("sells");
             break;
             case "goBack":
-                menuController.previousMenu();
+                MENU_CONTROLLER.previousMenu();
             break;
             default:
                 System.out.println("Doing: " + actionName);

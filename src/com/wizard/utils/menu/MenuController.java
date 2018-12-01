@@ -35,7 +35,11 @@ public class MenuController {
     
     private void triggerLastMenu() {
         // TODO: Probablemente de un error aquí por el índice
-        this.menus.get(this.menus.size()).printAndPrompt();
+        if (this.menus.size() == 1) {
+            this.menus.get(0).printAndPrompt();
+        } else {
+            this.menus.get(this.menus.size() - 1).printAndPrompt();
+        }
     }
     
     private void initializateMenus() throws Exception {
@@ -107,7 +111,7 @@ public class MenuController {
     }
     
     public void previousMenu() {
-        this.menus.remove(this.menus.size());
+        this.menus.remove(this.menus.size() - 1);
         this.triggerLastMenu();
     }
 }

@@ -46,6 +46,7 @@ public class Menu {
     }
     
     private boolean validateAndCallAction(char selectedOption) {
+        System.out.println(selectedOption);
         if (this.menuMap.getOrDefault(selectedOption, "NO_OPTION").equals("NO_OPTION")) {
             ConsoleUtils.printErrorMessage("Esa opción no existe.");
             return false;
@@ -63,7 +64,7 @@ public class Menu {
     public void printAndPrompt() {
         int suposedFinalLength = this.longestMenuLabel + 7;
         
-        System.out.println("\n======== " + this.menuName + "========\n");
+        System.out.println("\n======== " + this.menuName + " ========\n");
         for (MenuEntry menuOption : this.menuOptions) {
             String lineToPrint = " * " + menuOption.menuLabel + " ";
             String remainingDots = "";
