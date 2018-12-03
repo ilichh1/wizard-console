@@ -6,7 +6,8 @@
 package com.wizard.client;
 
 import com.wizard.abstracts.Person;
-import java.util.Date;
+import com.wizard.utils.ConsoleUtils;
+import com.wizard.utils.DataValidator;
 
 /**
  *
@@ -18,19 +19,63 @@ public class Client extends Person {
     private String email;
     private String address;
     
-    public Client(int id, String name, String surname, Date registeredDate, Date modifiedDate, String phone, String email, String address) {
-        // TODO: Validar los tipos de datos y formato de datos
-        super(id, name, surname, registeredDate, modifiedDate);
+    public Client(String name, String surname, String phone, String email, String address) {
+        super(name, surname);
         this.phone = phone;
         this.email = email;
         this.address = address;
+    }
+    
+    public Client() {
+        super();
+        this.phone = null;
+        this.email = null;
+        this.address = null;
+    }
+    
+    @Override
+    public void askForProductField(String fieldName) {
+        boolean isDataValid = false;
+        do {
+            try {
+                switch (fieldName) {
+                    case "name":
+                        super.askForProductField("name");
+                    break;
+                    case "surname":
+                        super.askForProductField("surname");
+                    break;
+                    case "phone":
+                        System.out.print("Télefono: ");
+                        this.setPhone(ConsoleUtils.askForString());
+                    break;
+                    case "email":
+                        System.out.print("Correo électronico: ");
+                        this.setEmail(ConsoleUtils.askForString());
+                    break;
+                    case "address":
+                        System.out.print("Dirección: ");
+                        this.setAddress(ConsoleUtils.askForString());
+                    break;
+                    default:
+                        System.out.println("ERROR: ESE CAMPO NO EXISTE EN 'Client'");
+                        System.exit(0);
+                    return;
+                }
+                isDataValid = true;
+            } catch (Exception ex)  {
+                ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
+            }
+        } while(!isDataValid);
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone) throws Exception {
+        if(phone.length() != 10)
+            throw new Exception("El télefono tiene que tener exactamente 10 dígitos.");
         this.phone = phone;
     }
 
@@ -38,15 +83,26 @@ public class Client extends Person {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws Exception {
+        if(!DataValidator.validateEmail(email))
+            throw new Exception("Ese email es inválido.");
         this.email = email;
     }
 
     public String getAddress() {
         return address;
     }
+    
+    public String getTruncatedAddress() {
+        if (this.address.length() > 15) {
+            return this.address.substring(0, 12) + "...";
+        }
+        return this.address;
+    }
 
-    public void setAddress(String address) {
+    public void setAddress(String address) throws Exception {
+        if(address.length() < 12) 
+            throw new Exception("La direcicón es muy corta.");
         this.address = address;
     }
 }

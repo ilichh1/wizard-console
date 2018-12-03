@@ -5,6 +5,7 @@
  */
 package com.wizard.product;
 
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
 
@@ -12,7 +13,7 @@ import com.wizard.utils.DataValidator;
  *
  * @author ilichh1
  */
-public class Product {
+public class Product implements TablePrintable {
     // CATEGORIES
     public static final int BIKES = 0;
     public static final int WATER_GUNS = 1;
@@ -145,7 +146,7 @@ public class Product {
         longestCategoryName += 8;
         
         String topLine = "==== Categoria ====";
-        System.out.print("\n" + topLine + "\n");        
+        System.out.print("\n" + topLine + "\n");
         for (String category : CATEGORIES) {
             String lineToPrint = " *  " + category + " ";
             String remainingDots = "";
@@ -162,4 +163,15 @@ public class Product {
         
         System.out.println(bottomDividerLine);
     }
+    
+    @Override
+    public String[] toStringArray() {
+        return new String[] {
+            this.getName(),
+            this.getCategory(),
+            Integer.toString(this.getStock()),
+            Double.toString(this.getPrice())
+        };
+    }
+    
 }

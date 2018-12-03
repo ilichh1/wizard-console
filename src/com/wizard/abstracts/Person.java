@@ -5,79 +5,59 @@
  */
 package com.wizard.abstracts;
 
-import com.wizard.interfaces.Registrable;
-import java.util.Date;
+import com.wizard.utils.ConsoleUtils;
+import com.wizard.utils.DataValidator;
 
 /**
  *
  * @author ilichh1
  */
-public abstract class Person implements Registrable {
-    
-    private Date registeredDate;
-    private Date modifiedDate;
-    
-    private int id;
+public abstract class Person {
     private String name;
     private String surname;
     
     public Person () {
-        this.id = -1;
         this.name = null;
         this.surname = null;
-        this.registeredDate = null;
-        this.modifiedDate = null;
     }
     
-    public Person (int id, String name, String surname) {
-        this.id = id;
+    public Person (String name, String surname) {
         this.name = name;
         this.surname = surname;
-        this.registeredDate = null;
-        this.modifiedDate = null;
     }
     
-    public Person (int id, String name, String surname, Date registeredDate, Date modifiedDate) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.registeredDate = registeredDate;
-        this.modifiedDate = modifiedDate;
-    }
-
-    @Override
-    public Date getRegisteredDate() {
-        return registeredDate;
-    }
-    
-    @Override
-    public void setRegisteredDate(Date registeredDate) {
-        this.registeredDate = registeredDate;
-    }
-    
-    @Override
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-    
-    @Override
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    protected void askForProductField(String fieldName) {
+        boolean isDataValid = false;
+        do {
+            try {
+                switch (fieldName) {
+                    case "name":
+                        System.out.print("Nombre: ");
+                        this.setName(ConsoleUtils.askForString());
+                    break;
+                    case "surname":
+                        System.out.print("Apellido: ");
+                        this.setSurname(ConsoleUtils.askForString());
+                    break;
+                    default:
+                        System.out.println("ERROR: ESE CAMPO NO EXISTE EN 'Person'");
+                        System.exit(0);
+                    return;
+                }
+                isDataValid = true;
+            } catch (Exception ex)  {
+                ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
+            }
+        } while(!isDataValid);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
+        if (!DataValidator.validateName(name))
+            throw new Exception("El nombre es incorrecto.");
         this.name = name;
     }
 
@@ -85,7 +65,9 @@ public abstract class Person implements Registrable {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(String surname) throws Exception {
+        if (!DataValidator.validateName(surname))
+            throw new Exception("El apellido es incorrecto.");
         this.surname = surname;
     }
     
