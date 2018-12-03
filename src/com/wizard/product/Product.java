@@ -5,6 +5,7 @@
  */
 package com.wizard.product;
 
+import com.wizard.interfaces.ConsoleAskable;
 import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
@@ -13,7 +14,7 @@ import com.wizard.utils.DataValidator;
  *
  * @author ilichh1
  */
-public class Product implements TablePrintable {
+public class Product implements TablePrintable, ConsoleAskable {
     // CATEGORIES
     public static final int BIKES = 0;
     public static final int WATER_GUNS = 1;
@@ -50,14 +51,13 @@ public class Product implements TablePrintable {
         this.price = price;
     }
     
-    public void promptInConsole() {
-        String[] fieldNames = new String[] {"name", "category", "stock", "price"};
-        for (String fieldName : fieldNames) {
-            this.askForProductField(fieldName);
-        }
+    @Override
+    public String[] getAskableFieldNames() {
+        return new String[] {"name", "category", "stock", "price"};
     }
     
-    private void askForProductField(String fieldName) {
+    @Override
+    public void askForFieldName(String fieldName) {
         boolean isDataValid;
         do {
             try {

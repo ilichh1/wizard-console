@@ -6,6 +6,7 @@
 package com.wizard.utils;
 
 import com.wizard.product.Product;
+import com.wizard.utils.menu.MenuController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -60,4 +61,11 @@ public class DataValidator {
         return !(categoryId < 0 || categoryId > Product.CATEGORIES.length - 1);
     }
     
+    public static boolean validateProductExists(int productID) {
+        return MenuController.PRODUCTS_CONTROLLER.getProductById(productID) != null;
+    }
+    
+    public static boolean validateClientExists(int clientID) throws Exception {
+        throw new Exception("Sin soporte aún.");
+    }
 }

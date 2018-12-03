@@ -6,6 +6,8 @@
 package com.wizard.client;
 
 import com.wizard.abstracts.Person;
+import com.wizard.interfaces.ConsoleAskable;
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
 
@@ -13,7 +15,7 @@ import com.wizard.utils.DataValidator;
  *
  * @author ilichh1
  */
-public class Client extends Person {
+public class Client extends Person implements TablePrintable, ConsoleAskable {
     
     private String phone;
     private String email;
@@ -34,16 +36,27 @@ public class Client extends Person {
     }
     
     @Override
-    public void askForProductField(String fieldName) {
+    public String[] getAskableFieldNames() {
+        return new String[] {
+            "name",
+            "surname",
+            "phone",
+            "email",
+            "address"
+        };
+    }
+    
+    @Override
+    public void askForFieldName(String fieldName) {
         boolean isDataValid = false;
         do {
             try {
                 switch (fieldName) {
                     case "name":
-                        super.askForProductField("name");
+                        super.askForFieldName("name");
                     break;
                     case "surname":
-                        super.askForProductField("surname");
+                        super.askForFieldName("surname");
                     break;
                     case "phone":
                         System.out.print("Télefono: ");
@@ -94,15 +107,26 @@ public class Client extends Person {
     }
     
     public String getTruncatedAddress() {
-        if (this.address.length() > 15) {
-            return this.address.substring(0, 12) + "...";
+        if (this.address.length() > 48) {
+            return this.address.substring(0, 32) + "...";
         }
         return this.address;
     }
 
     public void setAddress(String address) throws Exception {
-        if(address.length() < 12) 
+        if(address.length() < 32) 
             throw new Exception("La direcicón es muy corta.");
         this.address = address;
+    }
+
+    @Override
+    public String[] toStringArray() {
+        return new String[] {
+            this.getName(),
+            this.getSurname(),
+            this.getPhone(),
+            this.getEmail(),
+            this.getTruncatedAddress()
+        };
     }
 }

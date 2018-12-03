@@ -37,6 +37,14 @@ public class ProductsController {
         ConsoleUtils.printSuccessMessage("Producto guardado correctamente.");
     }
     
+    public Product getProductById(int id) {
+        try {
+            return this.products.get(id);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    
     private void initializateProductsController() {
         this.products.addAll(
                 Arrays.asList(new Product[] {

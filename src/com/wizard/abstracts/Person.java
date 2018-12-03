@@ -5,6 +5,7 @@
  */
 package com.wizard.abstracts;
 
+import com.wizard.interfaces.ConsoleAskable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
 
@@ -12,7 +13,7 @@ import com.wizard.utils.DataValidator;
  *
  * @author ilichh1
  */
-public abstract class Person {
+public abstract class Person implements ConsoleAskable {
     private String name;
     private String surname;
     
@@ -26,7 +27,8 @@ public abstract class Person {
         this.surname = surname;
     }
     
-    protected void askForProductField(String fieldName) {
+    @Override
+    public void askForFieldName(String fieldName) {
         boolean isDataValid = false;
         do {
             try {

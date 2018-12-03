@@ -79,7 +79,7 @@ public class Menu {
             bottomDividerLine += "=";
         
         
-        System.out.println("\n" + topDividerLine + "\n");
+        System.out.print("\n" + topDividerLine + "\n");
         for (MenuEntry menuOption : this.menuOptions) {
             String lineToPrint = " *  " + menuOption.menuLabel + " ";
             String remainingDots = "";
@@ -90,5 +90,26 @@ public class Menu {
         System.out.println(bottomDividerLine);
         
         return this.promptUser(actioner);
+    }
+    
+    public void printMenuWithoutPrompt(MainCallable actioner) {
+        int suposedFinalLength = this.longestMenuLabel + 8;
+        
+        String topDividerLine = "======== " + this.menuName + " ========";
+        String bottomDividerLine = "";
+        
+        for (int i = 0; i < topDividerLine.length(); i++)
+            bottomDividerLine += "=";
+        
+        
+        System.out.print("\n" + topDividerLine + "\n");
+        for (MenuEntry menuOption : this.menuOptions) {
+            String lineToPrint = " *  " + menuOption.menuLabel + " ";
+            String remainingDots = "";
+            for (int i = 0; i < suposedFinalLength - lineToPrint.length(); i++)
+                remainingDots += ".";
+            System.out.println(lineToPrint + remainingDots + " " + menuOption.menuOption + ")");
+        }
+        System.out.println(bottomDividerLine);
     }
 }

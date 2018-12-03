@@ -1,10 +1,7 @@
 package com.wizard.sell;
 
-import com.wizard.client.Client;
-import com.wizard.interfaces.Registrable;
 import com.wizard.product.SoldProduct;
 import java.time.LocalDate;
-import java.util.Date;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,38 +13,56 @@ import java.util.Date;
  *
  * @author ilichh1
  */
-public class Sell implements Registrable {
+public class Sell {
     
-    String saleman;
-    Client client;
-    SoldProduct[] products;
-    double total;
-    
-    private LocalDate registeredDate;
-    private LocalDate modifiedDate;
+    private int saleman;
+    private int client;
+    private SoldProduct[] products;
+    private LocalDate dateSold;
     
     public Sell() {
-        
+        this.saleman = -1;
+        this.client = -1;
+        this.products = null;
+        this.dateSold = null;
     }
     
-    @Override
-    public void setRegisteredDate(Date registeredDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Sell(int salemanId, int clientWhoBuys, SoldProduct[] products, LocalDate dateSold) {
+        this.saleman = salemanId;
+        this.client = clientWhoBuys;
+        this.products = products;
+        this.dateSold = dateSold;
     }
 
-    @Override
-    public Date getRegisteredDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getSaleman() {
+        return saleman;
     }
 
-    @Override
-    public void setModifiedDate(Date modifiedDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setSaleman(int saleman) {
+        this.saleman = saleman;
     }
 
-    @Override
-    public Date getModifiedDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getClient() {
+        return client;
     }
-    
+
+    public void setClient(int client) {
+        this.client = client;
+    }
+
+    public SoldProduct[] getProducts() {
+        return products;
+    }
+
+    public void setProducts(SoldProduct[] products) {
+        this.products = products;
+    }
+
+    public LocalDate getDateSold() {
+        return dateSold;
+    }
+
+    public void setDateSold(LocalDate dateSold) {
+        this.dateSold = dateSold;
+    }
 }

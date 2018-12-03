@@ -7,6 +7,7 @@ package com.wizard.utils.menu;
 
 import com.wizard.interfaces.MainCallable;
 import com.wizard.main.WizardConsole;
+import com.wizard.main.controllers.ClientsController;
 import com.wizard.main.controllers.ProductsController;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ import java.util.ArrayList;
 public class MenuController implements MainCallable {
     
     // Wizard Controllers
-    private static final ProductsController PRODUCTS_CONTROLLER = new ProductsController();
+    public static final ProductsController PRODUCTS_CONTROLLER = new ProductsController();
+    public static final ClientsController CLIENTS_CONTROLLER = new ClientsController();
     
     private final ArrayList<Menu> menus = new ArrayList<>();
     
@@ -51,6 +53,7 @@ public class MenuController implements MainCallable {
                 System.out.println("¡Hasta luego! - Webtix Software");
                 WizardConsole.isExecutionEnded = true;
             break;
+            // PRODUCTS MENU ACTIONS
             case "goToProductsMenu":
                 this.moveToMenu("products");
             break;
@@ -60,9 +63,17 @@ public class MenuController implements MainCallable {
             case "viewAllProducts":
                 PRODUCTS_CONTROLLER.printTable();
             break;
+            // CLIENTS MENU ACTIONS
             case "goToClientsMenu":
                 this.moveToMenu("clients");
             break;
+            case "addClient":
+                CLIENTS_CONTROLLER.createAndSaveClient();
+            break;
+            case "viewAllClients":
+                CLIENTS_CONTROLLER.printTable();
+            break;
+            // SALEMEN MENU ACTIONS
             case "goToSalesmenMenu":
                 this.moveToMenu("salesmen");
             break;
