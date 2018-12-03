@@ -17,13 +17,14 @@ import java.util.Arrays;
  */
 public class ProductsController {
     // FIELDS
-    private final ArrayList<Product> products = new ArrayList<>();
+    private final ArrayList<Product> controllerArray = new ArrayList<>();
     private static final String[] PRODUCTS_HEADERS = new String[] {
         " ID ",
         "Nombre",
         "Categoria",
         "Existencia",
-        "Precio" };
+        "Precio"
+    };
     
     public ProductsController() {
         this.initializateProductsController();
@@ -33,20 +34,38 @@ public class ProductsController {
         Product productToSave = new Product();
         productToSave.promptInConsole();
         
-        this.products.add(productToSave);
+        this.controllerArray.add(productToSave);
         ConsoleUtils.printSuccessMessage("Producto guardado correctamente.");
     }
     
     public Product getProductById(int id) {
         try {
-            return this.products.get(id);
+            return this.controllerArray.get(id);
         } catch (Exception ex) {
             return null;
         }
     }
     
+    public void search(String searchPattern) {
+        // Aquí me quedé
+        // TODO:
+        // Añadir la funcionalidad de eliminar un producto
+        // Tambien eliminar el resto de cosas
+        // Decidir si dejar o quitar "Editar producto"
+        ArrayList<Product> filteredProducts = (ArrayList<Product>) this.controllerArray.clone();
+        filteredProducts.removeIf(product -> !product.contains(searchPattern));
+        
+        if(filteredProducts.isEmpty()) {
+            ConsoleUtils.printSuccessMessage("La búsqueda terminó sin resultados");
+            return;
+        }
+        
+        TablePrintable[] rows = filteredProducts.toArray(new TablePrintable[filteredProducts.size()]);
+        ConsoleUtils.printAsTable(rows, PRODUCTS_HEADERS);
+    }
+    
     private void initializateProductsController() {
-        this.products.addAll(
+        this.controllerArray.addAll(
                 Arrays.asList(new Product[] {
                     new Product("Nerf SuperSoaker 501", Product.WATER_GUNS, 15, 499.99),
                     new Product("Barbie Super Estrella", Product.DOLLS, 25, 299.99),
@@ -57,7 +76,7 @@ public class ProductsController {
     }
     
     public void printTable() {
-        TablePrintable[] rows = products.toArray(new TablePrintable[products.size()]);
+        TablePrintable[] rows = controllerArray.toArray(new TablePrintable[controllerArray.size()]);
         ConsoleUtils.printAsTable(rows, PRODUCTS_HEADERS);
     }
     

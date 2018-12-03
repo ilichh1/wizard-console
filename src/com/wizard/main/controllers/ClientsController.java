@@ -17,7 +17,6 @@ import java.util.Arrays;
 public class ClientsController {
     
     private final ArrayList<Client> clients = new ArrayList<>();
-    
     private static final String[] COLUMN_HEADERS = new String[] {
         "ID",
         "Nombre(s)",

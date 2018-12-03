@@ -6,15 +6,17 @@
 package com.wizard.product;
 
 import com.wizard.interfaces.ConsoleAskable;
+import com.wizard.interfaces.Filterable;
 import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
+import java.util.Arrays;
 
 /**
  *
  * @author ilichh1
  */
-public class Product implements TablePrintable, ConsoleAskable {
+public class Product implements Filterable, TablePrintable, ConsoleAskable {
     // CATEGORIES
     public static final int BIKES = 0;
     public static final int WATER_GUNS = 1;
@@ -39,8 +41,8 @@ public class Product implements TablePrintable, ConsoleAskable {
     
     public Product() {
         this.name = null;
-        this.category = -1;
-        this.stock = -1;
+        this.category = 0;
+        this.stock = 0;
         this.price = Double.NaN;
     }
     
@@ -172,6 +174,11 @@ public class Product implements TablePrintable, ConsoleAskable {
             Integer.toString(this.getStock()),
             Double.toString(this.getPrice())
         };
+    }
+    
+    @Override
+    public String toString() {
+        return Arrays.toString(this.toStringArray());
     }
     
 }

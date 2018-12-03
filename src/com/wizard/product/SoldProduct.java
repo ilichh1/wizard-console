@@ -22,10 +22,16 @@ public class SoldProduct implements ConsoleAskable {
     // THIS FIELD ONLY WORKS AS A LOCAL REFERENCE TO GET MAX STOCK AVAILABLE
     private int productIdReference = -1;
     
-    public SoldProduct (String nm, double pr, int amt) {
+    public SoldProduct(String nm, double pr, int amt) {
         this.name = nm;
         this.price = pr;
         this.amount = amt;
+    }
+    
+    public SoldProduct() {
+        this.name = null;
+        this.price = -1;
+        this.amount = -1;
     }
 
     @Override

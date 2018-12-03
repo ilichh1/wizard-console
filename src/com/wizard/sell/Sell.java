@@ -1,5 +1,6 @@
 package com.wizard.sell;
 
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.product.SoldProduct;
 import java.time.LocalDate;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
  *
  * @author ilichh1
  */
-public class Sell {
+public class Sell implements TablePrintable {
     
     private int saleman;
     private int client;
@@ -33,17 +34,48 @@ public class Sell {
         this.products = products;
         this.dateSold = dateSold;
     }
-
-    public int getSaleman() {
-        return saleman;
+    
+    // TablePrintable interface methods
+    @Override
+    public String[] toStringArray() {
+        return new String[] {
+            this.getSaleman(),
+            this.getClient(),
+            Integer.toString(this.products.length),
+            this.getTotalAsText(),
+            this.dateSold.toString()
+        };
+    }
+    
+    public String getTotalAsText() {
+        return Double.toString(Math.floor(this.getTotal() * 100) / 100);
+    }
+            
+    public double getTotal() {
+        if (this.products.length < 0)
+            return 0;
+        // If the array is not empty
+        double total = 0;
+        for (SoldProduct product : this.products) {
+            total += product.getTotal();
+        }
+        return total;
+    }
+    
+    // GETTERS & SETTERS
+    
+    public String getSaleman() {
+        // TODO: return correct value
+        return "TODO";
     }
 
     public void setSaleman(int saleman) {
         this.saleman = saleman;
     }
 
-    public int getClient() {
-        return client;
+    public String getClient() {
+        // TODO: return correct value
+        return "TODO";
     }
 
     public void setClient(int client) {

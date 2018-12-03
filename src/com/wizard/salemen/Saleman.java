@@ -6,6 +6,7 @@
 package com.wizard.salemen;
 
 import com.wizard.abstracts.Person;
+import com.wizard.utils.ConsoleUtils;
 
 /**
  *
@@ -27,7 +28,6 @@ public class Saleman extends Person {
         "Especial Plus"
     };
     
-    
     int ventasPrevias;
     
     public Saleman() {
@@ -39,4 +39,26 @@ public class Saleman extends Person {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public void askForFieldName(String fieldName) {
+        boolean isDataValid;
+        do {
+            try {
+                switch (fieldName) {
+                    case "name":
+                        System.out.print("Nombre del producto: ");
+                        this.setName(ConsoleUtils.askForString());
+                    break;
+                    default:
+                        System.out.println("ERROR: ESE CAMPO NO EXISTE EN 'Product'");
+                        System.exit(0);
+                    return;
+                }
+                isDataValid = true;
+            } catch (Exception ex)  {
+                ConsoleUtils.printErrorMessage(ex.getLocalizedMessage());
+                isDataValid = false;
+            }
+        } while(!isDataValid);
+    }
 }

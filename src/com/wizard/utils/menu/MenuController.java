@@ -9,6 +9,7 @@ import com.wizard.interfaces.MainCallable;
 import com.wizard.main.WizardConsole;
 import com.wizard.main.controllers.ClientsController;
 import com.wizard.main.controllers.ProductsController;
+import com.wizard.main.controllers.SellsController;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class MenuController implements MainCallable {
     // Wizard Controllers
     public static final ProductsController PRODUCTS_CONTROLLER = new ProductsController();
     public static final ClientsController CLIENTS_CONTROLLER = new ClientsController();
+    public static final SellsController SELLS_CONTROLLER = new SellsController();
     
     private final ArrayList<Menu> menus = new ArrayList<>();
     
@@ -63,6 +65,10 @@ public class MenuController implements MainCallable {
             case "viewAllProducts":
                 PRODUCTS_CONTROLLER.printTable();
             break;
+            case "searchProduct":
+                System.out.print("Ingrese el valor por el que desea buscar: ");
+                PRODUCTS_CONTROLLER.search(ConsoleUtils.askForString());
+            break;
             // CLIENTS MENU ACTIONS
             case "goToClientsMenu":
                 this.moveToMenu("clients");
@@ -77,8 +83,12 @@ public class MenuController implements MainCallable {
             case "goToSalesmenMenu":
                 this.moveToMenu("salesmen");
             break;
+            // SELLS MENU ACTIONs
             case "goToSellsMenu":
                 this.moveToMenu("sells");
+            break;
+            case "viewAllSells":
+                SELLS_CONTROLLER.printTable();
             break;
             case "goBack":
                 this.previousMenu();
@@ -130,7 +140,7 @@ public class MenuController implements MainCallable {
         });
 
         // Menú de vendedores
-        this.salesmenMenu = new Menu("Menú de clientes", new MenuEntry[] {
+        this.salesmenMenu = new Menu("Menú de vendedores", new MenuEntry[] {
             new MenuEntry("AGREGAR VENDEDOR", 'A', "addSalesman"),
             new MenuEntry("VER TODOS LOS VENDEDOR", 'B', "viewAllSalesmen"),
             new MenuEntry("BUSCAR VENDEDOR", 'C', "searchSalesman"),
@@ -143,7 +153,7 @@ public class MenuController implements MainCallable {
             new MenuEntry("AGREGAR VENTA", 'A', "addSell"),
             new MenuEntry("VER TODAS LAS VENTAS", 'B', "viewAllSells"),
             new MenuEntry("BUSCAR VENTA", 'C', "searchSell"),
-            new MenuEntry("EDITAR VENTA", 'D', "editSell"),
+            // new MenuEntry("EDITAR VENTA", 'D', "editSell"),
             new MenuEntry("REGRESAR", 'E', "goBack")
         });
     }
