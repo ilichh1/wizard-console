@@ -1,7 +1,6 @@
 package com.wizard.utils;
 
 import com.wizard.interfaces.TablePrintable;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -111,7 +110,33 @@ public class ConsoleUtils {
         
         return filledSpace;
     }
-   
+    
+    public static void printWelcomeMessage() {
+        String webtix =
+                " _     _  _______  _______  _______  ___   __   __ \n" +
+                "| | _ | ||       ||  _    ||       ||   | |  |_|  |\n" +
+                "| || || ||    ___|| |_|   ||_     _||   | |       |\n" +
+                "|       ||   |___ |       |  |   |  |   | |       |\n" +
+                "|       ||    ___||  _   |   |   |  |   |  |     | \n" +
+                "|   _   ||   |___ | |_|   |  |   |  |   | |   _   |\n" +
+                "|__| |__||_______||_______|  |___|  |___| |__| |__|";
+        
+        System.out.print(webtix + "\n\nBienvenido al sistema de Wizard.");
+    }
+    
+    public static void validateUsername() {
+        String username;
+        String password;
+        printWelcomeMessage();
+        System.out.println("\n\n");
+        do {
+            System.out.print("Usuario: ");
+            username = ConsoleUtils.askForString();
+            System.out.print("Contraseña: ");
+            password = ConsoleUtils.askForString();
+        } while(!DataValidator.validateCredentials(username, password));
+    }
+    
     // Function to print any ArrayList as a Table
     public static void printAsTable(TablePrintable[] controllerArray, String[] headers) {
         String tableContent = "";

@@ -69,6 +69,14 @@ public class MenuController implements MainCallable {
                 System.out.print("Ingrese el valor por el que desea buscar: ");
                 PRODUCTS_CONTROLLER.search(ConsoleUtils.askForString());
             break;
+            case "editProduct":
+                System.out.print("Ingrese el ID del producto a editar: ");
+                PRODUCTS_CONTROLLER.editProduct(ConsoleUtils.askForInteger());
+            break;
+            case "removeProduct":
+                System.out.print("Ingrese el ID del producto a eliminar: ");
+                PRODUCTS_CONTROLLER.removeProduct(ConsoleUtils.askForInteger());
+            break;
             // CLIENTS MENU ACTIONS
             case "goToClientsMenu":
                 this.moveToMenu("clients");
@@ -83,7 +91,7 @@ public class MenuController implements MainCallable {
             case "goToSalesmenMenu":
                 this.moveToMenu("salesmen");
             break;
-            // SELLS MENU ACTIONs
+            // SELLS MENU ACTIONS
             case "goToSellsMenu":
                 this.moveToMenu("sells");
             break;
@@ -126,8 +134,9 @@ public class MenuController implements MainCallable {
             new MenuEntry("AGREGAR PRODUCTO", 'A', "addProduct"),
             new MenuEntry("VER TODOS LOS PRODUCTOS", 'B', "viewAllProducts"),
             new MenuEntry("BUSCAR PRODUCTO", 'C', "searchProduct"),
-            new MenuEntry("EDITAR PRODUCTO", 'D', "editProduct"),
-            new MenuEntry("REGRESAR", 'E', "goBack")
+            new MenuEntry("ELIMINAR PRODUCTO", 'D', "removeProduct"),
+            new MenuEntry("EDITAR PRODUCTO", 'E', "editProduct"),
+            new MenuEntry("REGRESAR", 'F', "goBack")
         });
 
         // Menú de clientes

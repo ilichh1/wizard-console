@@ -5,6 +5,7 @@
  */
 package com.wizard.main;
 
+import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.menu.MenuController;
 
 /**
@@ -21,6 +22,7 @@ public class WizardConsole {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ConsoleUtils.validateUsername();
         do {
             MENU_CONTROLLER.startMenuController();
         } while(!isExecutionEnded);

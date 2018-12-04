@@ -38,6 +38,24 @@ public class ProductsController {
         ConsoleUtils.printSuccessMessage("Producto guardado correctamente.");
     }
     
+    public void editProduct(int productId) {
+        try {
+            this.controllerArray.get(productId).promptInConsole();
+            ConsoleUtils.printSuccessMessage("Producto editado correctamente");
+        } catch (Exception ex) {
+            ConsoleUtils.printErrorMessage("No existe ningún producto con ese ID.");
+        }
+    }
+    
+    public void removeProduct(int productId) {
+        try {
+            this.controllerArray.remove(productId);
+            ConsoleUtils.printSuccessMessage("Producto eliminado correctamente");
+        } catch (Exception ex) {
+            ConsoleUtils.printErrorMessage("No existe ningún producto con ese ID.");
+        }
+    }
+    
     public Product getProductById(int id) {
         try {
             return this.controllerArray.get(id);
