@@ -5,6 +5,7 @@
  */
 package com.wizard.main.controllers;
 
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.product.SoldProduct;
 import com.wizard.sell.Sell;
 import com.wizard.utils.ConsoleUtils;
@@ -61,6 +62,28 @@ public class SellsController {
                 new SoldProduct("Sooby Doo", 215.50, 5)
             }, LocalDate.of(2018, 12, 4))
         }));
+    }
+    
+    public int countSellsBySaleman(int salemanId) {
+        int salemanSellCount = 0;
+        for (Sell sell : this.sells) {
+            if (sell.getSalemanId() == salemanId)
+                salemanSellCount++;
+        }
+        return salemanSellCount;
+    }
+    
+    public void search(String searchPattern) {
+        ArrayList<Sell> filteredProducts = (ArrayList<Sell>) this.sells.clone();
+        filteredProducts.removeIf(product -> !product.contains(searchPattern));
+        
+        if(filteredProducts.isEmpty()) {
+            ConsoleUtils.printSuccessMessage("La búsqueda terminó sin resultados");
+            return;
+        }
+        
+        TablePrintable[] rows = filteredProducts.toArray(new TablePrintable[filteredProducts.size()]);
+        ConsoleUtils.printAsTable(rows, COLUMN_HEADERS);
     }
     
     public void printTable() {

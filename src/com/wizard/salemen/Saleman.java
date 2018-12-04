@@ -6,13 +6,15 @@
 package com.wizard.salemen;
 
 import com.wizard.abstracts.Person;
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
+import com.wizard.utils.menu.MenuController;
 
 /**
  *
  * @author ilichh1
  */
-public class Saleman extends Person {
+public class Saleman extends Person implements TablePrintable {
     
     private static final int NORMAL = 0;
     private static final int ESPECIAL = 1;
@@ -28,11 +30,16 @@ public class Saleman extends Person {
         "Especial Plus"
     };
     
+    int salemanId;
     int ventasPrevias;
     
     public Saleman() {
         super();
+        this.ventasPrevias = -1;
+        this.salemanId = -1;
     }
+    
+    
 
     @Override
     public String[] getAskableFieldNames() {
@@ -60,5 +67,17 @@ public class Saleman extends Person {
                 isDataValid = false;
             }
         } while(!isDataValid);
+    }
+    
+    public int getSalemanSells() {
+        return this.ventasPrevias + MenuController.SELLS_CONTROLLER.countSellsBySaleman(this.salemanId);
+    }
+
+    @Override
+    public String[] toStringArray() {
+        return new String[] {
+            this.getName() + this.getSurname(),
+            
+        };
     }
 }

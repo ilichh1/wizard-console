@@ -1,5 +1,6 @@
 package com.wizard.sell;
 
+import com.wizard.interfaces.Filterable;
 import com.wizard.interfaces.TablePrintable;
 import com.wizard.product.SoldProduct;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
  *
  * @author ilichh1
  */
-public class Sell implements TablePrintable {
+public class Sell implements TablePrintable, Filterable {
     
     private int saleman;
     private int client;
@@ -66,16 +67,20 @@ public class Sell implements TablePrintable {
     
     public String getSaleman() {
         // TODO: return correct value
-        return "TODO";
+        return "Juan Perez";
     }
 
     public void setSaleman(int saleman) {
         this.saleman = saleman;
     }
+    
+    public int getSalemanId() {
+        return this.saleman;
+    }
 
     public String getClient() {
         // TODO: return correct value
-        return "TODO";
+        return "Jorge Robles";
     }
 
     public void setClient(int client) {

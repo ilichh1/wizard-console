@@ -7,6 +7,7 @@ package com.wizard.client;
 
 import com.wizard.abstracts.Person;
 import com.wizard.interfaces.ConsoleAskable;
+import com.wizard.interfaces.Filterable;
 import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import com.wizard.utils.DataValidator;
@@ -15,7 +16,7 @@ import com.wizard.utils.DataValidator;
  *
  * @author ilichh1
  */
-public class Client extends Person implements TablePrintable, ConsoleAskable {
+public class Client extends Person implements TablePrintable, ConsoleAskable, Filterable {
     
     private String phone;
     private String email;

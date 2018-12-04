@@ -25,7 +25,7 @@ public class DataValidator {
             ConsoleUtils.printSuccessMessage("Acceso correcto.");
             return true;
         } else {
-            ConsoleUtils.printErrorMessage("Acceso correcto.");
+            ConsoleUtils.printErrorMessage("Credenciales incorrectas.");
             return false;
         }
     }

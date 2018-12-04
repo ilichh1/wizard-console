@@ -84,6 +84,14 @@ public class MenuController implements MainCallable {
             case "addClient":
                 CLIENTS_CONTROLLER.createAndSaveClient();
             break;
+            case "searchClient":
+                System.out.print("Ingrese el valor de búsqueda: ");
+                CLIENTS_CONTROLLER.search(ConsoleUtils.askForString());
+            break;
+            case "editClient":
+                System.out.print("Ingrese el ID del cliente que quiere editar: ");
+                CLIENTS_CONTROLLER.editClient(ConsoleUtils.askForInteger());
+            break;
             case "viewAllClients":
                 CLIENTS_CONTROLLER.printTable();
             break;
@@ -98,6 +106,11 @@ public class MenuController implements MainCallable {
             case "viewAllSells":
                 SELLS_CONTROLLER.printTable();
             break;
+            case "searchSell":
+                System.out.print("Ingrese el valor de búsqueda de la venta: ");
+                SELLS_CONTROLLER.search(ConsoleUtils.askForString());
+            break;
+            // GENERAL ACTIONS
             case "goBack":
                 this.previousMenu();
             break;
@@ -123,7 +136,7 @@ public class MenuController implements MainCallable {
         this.startingMenu = new Menu("Menú de inicio", new MenuEntry[] {
             new MenuEntry("PRODUCTOS", 'A', "goToProductsMenu"),
             new MenuEntry("CLIENTES", 'B', "goToClientsMenu"),
-            new MenuEntry("VENDEDORES", 'C', "goToSalesmenMenu"),
+            // new MenuEntry("VENDEDORES", 'C', "goToSalesmenMenu"),
             new MenuEntry("VENTAS", 'D', "goToSellsMenu"),
             new MenuEntry("SALIR", 'E', "exit")
         });
@@ -159,7 +172,7 @@ public class MenuController implements MainCallable {
 
         // Menú de ventas
         this.sellsMenu = new Menu("Menú de ventas", new MenuEntry[] {
-            new MenuEntry("AGREGAR VENTA", 'A', "addSell"),
+            // new MenuEntry("AGREGAR VENTA", 'A', "addSell"),
             new MenuEntry("VER TODAS LAS VENTAS", 'B', "viewAllSells"),
             new MenuEntry("BUSCAR VENTA", 'C', "searchSell"),
             // new MenuEntry("EDITAR VENTA", 'D', "editSell"),

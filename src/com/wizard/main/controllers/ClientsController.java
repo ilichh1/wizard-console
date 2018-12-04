@@ -6,6 +6,7 @@
 package com.wizard.main.controllers;
 
 import com.wizard.client.Client;
+import com.wizard.interfaces.TablePrintable;
 import com.wizard.utils.ConsoleUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,28 @@ public class ClientsController {
         
         this.clients.add(clientToSave);
         ConsoleUtils.printSuccessMessage("Cliente guardado correctamente.");
+    }
+    
+    public void search(String searchPattern) {
+        ArrayList<Client> filteredProducts = (ArrayList<Client>) this.clients.clone();
+        filteredProducts.removeIf(product -> !product.contains(searchPattern));
+        
+        if(filteredProducts.isEmpty()) {
+            ConsoleUtils.printSuccessMessage("La búsqueda terminó sin resultados");
+            return;
+        }
+        
+        TablePrintable[] rows = filteredProducts.toArray(new TablePrintable[filteredProducts.size()]);
+        ConsoleUtils.printAsTable(rows, COLUMN_HEADERS);
+    }
+    
+    public void editClient(int clientId) {
+        try {
+            this.clients.get(clientId).promptInConsole();
+            ConsoleUtils.printSuccessMessage("Cliente editado correctamente");
+        } catch (Exception ex) {
+            ConsoleUtils.printErrorMessage("No existe ningún cliente con ese ID.");
+        }
     }
     
     public void printTable() {
